@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  xp: 1
+  hp: 1
+  captured: false
+  user: one
+  pokemon: one
+
+two:
+  xp: 1
+  hp: 1
+  captured: false
+  user: two
+  pokemon: two

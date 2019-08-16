@@ -2,10 +2,12 @@ class CreatePokemons < ActiveRecord::Migration[5.2]
   def change
     create_table :pokemons do |t|
       t.string :name
+      t.string :pokemon_type
+      t.string :img_front
+      t.string :img_back
       t.integer :hp
-      t.integer :xp
-      t.boolean :captured
-      t.references :user, foreign_key: true
+      t.string :evolution
+
       t.timestamps
     end
   end
