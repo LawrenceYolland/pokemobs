@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :pokemons
-  resources :users
+
+  namespace :api do
+    namespace :v1 do
+      resources :pokemons, only: [ :index]
+      resources :users, only: [ :index]
+    end
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
