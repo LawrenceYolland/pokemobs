@@ -6,7 +6,7 @@ class CreatePokemons < ActiveRecord::Migration[5.2]
       t.string :img_front
       t.string :img_back
       t.integer :hp
-      t.string :evolution
+      t.string :evolves_from
 
       t.timestamps
     end

@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_08_16_154330) do
     t.string "img_front"
     t.string "img_back"
     t.integer "hp"
-    t.string "evolution"
+    t.string "evolves_from"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
