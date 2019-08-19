@@ -4,19 +4,16 @@ import SignInForm from "../components/SignInForm";
 import API from "../adapters/API.js";
 
 class FormsContainer extends Component {
-  // submitLogin = () => {
-  //   API.loginUser()
-  // };
 
-  submitSignUp = user => {
-      API.createUser(user)
-  };
-
+  submitSignUp = user => API.signUpUser(user)
+  
+  submitSignIn = user => API.signInUser(user)
+   
   render() {
     return (
       <div className="forms-container">
         <SignUpForm submitSignUp={this.submitSignUp} />
-        <SignInForm submitLogin={this.submitLogin} />
+        <SignInForm submitSignIn={this.submitSignIn} />
       </div>
     );
   }

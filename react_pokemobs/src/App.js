@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Route exact path="/welcome" component={FormsContainer} />
+        <Route exact path={["/welcome", "/"]} component={FormsContainer} />
       </Router>
     );
   }

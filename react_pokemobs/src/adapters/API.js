@@ -15,10 +15,10 @@ const saveToken = data => {
 };
 
 const handleServerError = response => {
-  throw response
-}
+  throw response;
+};
 
-const createUser = user => {
+const signUpUser = user => {
   const configObj = {
     method: "POST",
     headers: {
@@ -32,6 +32,18 @@ const createUser = user => {
     .catch(handleServerError);
 };
 
+const signInUser = user => {
+  const configObj = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ user })
+  };
+  return fetch(loginURL, configObj).then(jsonify);
+};
+
 export default {
-  createUser
+  signUpUser,
+  signInUser
 };
