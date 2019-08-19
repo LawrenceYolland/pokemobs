@@ -5,9 +5,6 @@ class Api::V1::UsersController < ApplicationController
         render( { json: UserSerializer.new(User.all) } )
     end
 
-    # def show
-    #     render json: UserSerializer.new(User.find(params[:id])) 
-    # end
 
     def profile
         render json: { user: UserSerializer.new(current_user) }, status: :accepted

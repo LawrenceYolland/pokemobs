@@ -1,12 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 
-function App() {
-  return (
-    <div>
-    </div>
-  );
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import FormsContainer from "./containers/FormsContainer";
+
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <Route exact path="/welcome" component={FormsContainer} />
+      </Router>
+    );
+  }
 }
 
 export default App;

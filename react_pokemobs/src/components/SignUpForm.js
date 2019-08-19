@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-class SignInForm extends Component {
+class SignUpForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.props.submitLogin}>
+        <form onSubmit={this.props.submitSignUp}>
             <label>Username:</label>
             <input type="text" placeholder="username" name="username" />    
             <label>Password:</label>
@@ -16,4 +16,4 @@ class SignInForm extends Component {
   }
 }
 
-export default SignInForm;
+export default SignUpForm;
