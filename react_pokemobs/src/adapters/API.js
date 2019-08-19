@@ -1,5 +1,4 @@
 const endpoint = `http://localhost:3000/api/v1`;
-
 const signupURL = `${endpoint}/users`;
 const loginURL = `${endpoint}/login`;
 const validateURL = `${endpoint}/validate`;
@@ -9,8 +8,13 @@ const jsonify = resp => {
   else throw resp.json();
 };
 
+const constructHeaders = (moreHeaders = {}) => ({
+  Authorization: localStorage.getItem("token"),
+  ...moreHeaders
+});
+
 const saveToken = data => {
-  localStorage.setItem("token", data.token);
+  localStorage.setItem("token", data.jwt);
   return data.user;
 };
 
@@ -40,10 +44,29 @@ const signInUser = user => {
     },
     body: JSON.stringify({ user })
   };
-  return fetch(loginURL, configObj).then(jsonify);
+  return fetch(loginURL, configObj)
+    .then(jsonify)
+    .then(saveToken)
+    .catch(handleServerError);
 };
+
+const validateUser = () => {
+  if (!localStorage.getItem("token"))
+    return Promise.resolve({
+      user: "no token"
+    });
+
+  return fetch(validateURL, { headers: constructHeaders() })
+    .then(jsonify)
+    .then(saveToken)
+    .catch(handleServerError);
+};
+
+const clearToken = () => localStorage.removeItem('token')
 
 export default {
   signUpUser,
-  signInUser
+  signInUser,
+  validateUser,
+  clearToken
 };
