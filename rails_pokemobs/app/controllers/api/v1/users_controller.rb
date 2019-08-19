@@ -5,9 +5,6 @@ class Api::V1::UsersController < ApplicationController
         render( { json: UserSerializer.new(User.all) } )
     end
 
-    # def show
-    #     render json: UserSerializer.new(User.find(params[:id])) 
-    # end
 
     def profile
         render json: { user: UserSerializer.new(current_user) }, status: :accepted
@@ -17,7 +14,8 @@ class Api::V1::UsersController < ApplicationController
         @user = User.create(user_params)
         if @user.valid?
             @token = encode_token({ user_id: @user.id })
-            render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
+            # needed to correctly namespace serializer ...
+            render json: { user: Api::V1::UserSerializer.new(@user), jwt: @token }, status: :created
         else
             render json: { error: 'failed to create user' }, status: :not_acceptable
         end

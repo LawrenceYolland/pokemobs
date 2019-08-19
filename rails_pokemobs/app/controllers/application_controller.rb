@@ -6,14 +6,14 @@ class ApplicationController < ActionController::API
       JWT.encode(payload, 'my_s3cr3t')
     end
    
-    def auth_header
+    def get_token
       # { Authorization: 'Bearer <token>' }
-      request.headers['Authorization']
+      request.headers['Authorization'] || request.headers['Authorisation']
     end
    
     def decoded_token
-      if auth_header
-        token = auth_header.split(' ')[1]
+      if get_token
+        token = get_token.split(' ')[1]
         # header: { 'Authorization': 'Bearer <token>' }
         begin
           JWT.decode(token, 'my_s3cr3t', true, algorithm: 'HS256')
