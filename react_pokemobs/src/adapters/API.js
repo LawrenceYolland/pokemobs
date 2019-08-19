@@ -2,6 +2,7 @@ const endpoint = `http://localhost:3000/api/v1`;
 const signupURL = `${endpoint}/users`;
 const loginURL = `${endpoint}/login`;
 const validateURL = `${endpoint}/validate`;
+const pokemonURL = `${endpoint}/pokemons`;
 
 const jsonify = resp => {
   if (resp.ok) return resp.json();
@@ -21,6 +22,8 @@ const saveToken = data => {
 const handleServerError = response => {
   throw response;
 };
+
+const clearToken = () => localStorage.removeItem("token");
 
 const signUpUser = user => {
   const configObj = {
@@ -50,23 +53,27 @@ const signInUser = user => {
     .catch(handleServerError);
 };
 
-const validateUser = () => {
+const validateUser = async () => {
   if (!localStorage.getItem("token"))
     return Promise.resolve({
-      user: "no token"
+      user: null
     });
 
-  return fetch(validateURL, { headers: constructHeaders() })
-    .then(jsonify)
-    .then(saveToken)
-    .catch(handleServerError);
+  try {
+    const resp = await fetch(validateURL, { headers: constructHeaders() });
+    return jsonify(resp);
+  }
+  catch (response) {
+    return handleServerError(response);
+  }
 };
 
-const clearToken = () => localStorage.removeItem('token')
+const fetchPokemon = () => fetch(pokemonURL).then(jsonify)
 
 export default {
   signUpUser,
   signInUser,
   validateUser,
-  clearToken
+  clearToken,
+  fetchPokemon
 };

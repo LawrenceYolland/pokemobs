@@ -1,12 +1,14 @@
-import React from "react";
+import React, { Component } from "react";
 
+class Pokemon extends Component {
 
-class Pokemon extends React.Component {
   render() {
-    return <div>Pokemon
-     
-        <button onClick={() => window.history.back()}>back</ button>
-    </div>;
+    return (
+      <div>
+        <button onClick={() => window.history.back()}>back</button>
+
+      </div>
+    );
   }
 }
 

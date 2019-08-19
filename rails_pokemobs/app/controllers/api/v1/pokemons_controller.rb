@@ -1,11 +1,11 @@
 class Api::V1::PokemonsController < ApplicationController
 
     def index
-        render( { json: PokemonSerializer.new(Pokemon.all) } )
+        render( { json: Api::V1::PokemonSerializer.new(Pokemon.all) } )
     end
 
     def show
-        render( {json: PokemonSerializer.new(Pokemon.find(params[:id])) } )
+        render( {json: Api::V1::PokemonSerializer.new(Pokemon.find(params[:id])) } )
     end
 
 end
