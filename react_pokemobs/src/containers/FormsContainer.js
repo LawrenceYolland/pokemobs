@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import SignUpForm from "../components/SignUpForm";
 import SignInForm from "../components/SignInForm";
-import API from "/react_pokemobs/adapters/API.js";
+import API from "../adapters/API.js";
 
 class FormsContainer extends Component {
-  submitLogin = () => {
-    API.loginUser()
-  };
+  // submitLogin = () => {
+  //   API.loginUser()
+  // };
 
-  submitSignUp = () => {
-      API.createUser()
+  submitSignUp = user => {
+      API.createUser(user)
   };
 
   render() {
