@@ -53,22 +53,18 @@ const signInUser = user => {
     .catch(handleServerError);
 };
 
-const validateUser = async () => {
+const validateUser = () => {
   if (!localStorage.getItem("token"))
     return Promise.resolve({
       user: null
     });
 
-  try {
-    const resp = await fetch(validateURL, { headers: constructHeaders() });
-    return jsonify(resp);
-  }
-  catch (response) {
-    return handleServerError(response);
-  }
+  return fetch(validateURL, { headers: constructHeaders() })
+    .then(jsonify)
+    .catch(handleServerError);
 };
 
-const fetchPokemon = () => fetch(pokemonURL).then(jsonify)
+const fetchPokemon = () => fetch(pokemonURL).then(resp => resp.json())
 
 export default {
   signUpUser,

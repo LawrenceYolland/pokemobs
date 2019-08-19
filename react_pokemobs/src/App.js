@@ -16,17 +16,21 @@ class App extends Component {
   };
 
   componentDidMount() {
-    API.validateUser().then(data => {
-      if (data.user) {
-        this.setState({
-          user: data.user.data
-        });
-      }
-    });
+    // API.validateUser().then(data => {
+    //   if (data.user) {
+    //     this.setState({
+    //       user: data.user.data
+    //     });
+    //   }
+    // });
 
+    API.fetchPokemon().then(pokemon => pokemon.data);
 
-      API.fetchPokemon().then(console.log);
-    
+    //   pokemon =>
+    //   this.setState({
+    //     pokemon: pokemon
+    //   })
+    // );
   }
 
   submitSignUp = user => API.signUpUser(user);
@@ -47,12 +51,12 @@ class App extends Component {
       <React.Fragment>
         <div>LOADING THE PAGE</div>
         {/* {user ? ( */}
-          <PokeDex addPokemon={this.fetchPokemon} logOut={this.logOut} />
+        <PokeDex addPokemon={this.fetchPokemon} logOut={this.logOut} />
         {/* ) : ( */}
-          <FormsContainer
-            submitSignUp={this.submitSignUp}
-            submitSignIn={this.submitSignIn}
-          />
+        <FormsContainer
+          submitSignUp={this.submitSignUp}
+          submitSignIn={this.submitSignIn}
+        />
         )}
         <Route exact path="/arena" component={Arena} />
         <Route exact path="/pokemon" component={Pokemon} />

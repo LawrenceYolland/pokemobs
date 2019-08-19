@@ -46,7 +46,7 @@ class Api::V1::AuthController < ApplicationController
     def validate_token
       user = User.find_by(id: decoded_token[0]["user_id"])
       if user
-          render json: { user: Api::V1::UserSerializer.new(user), token: encode_token(user_id: user.id) }, status: :accepted
+          render json: { user: Api::V1::UserSerializer.new(user), jwt: encode_token(user_id: user.id) }, status: :accepted
       else
           render json: { message: 'User not found' }, status: :not_found
       end
