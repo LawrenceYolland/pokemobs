@@ -12,7 +12,7 @@ def build_pokemon
     range.each { |n|  
         pokemon = {}
         data = JSON.parse( RestClient.get("https://pokeapi.co/api/v2/pokemon/#{n}") )
-        species = JSON.parse( RestClient.get(data["species"]["url"]) ) 
+        species = JSON.parse( RestClient.get(data["species"]["url"] ) ) 
         evo_from = species["evolves_from_species"]
         pokemon = {
             name: data["name"],
@@ -20,7 +20,8 @@ def build_pokemon
             img_front: data["sprites"]["front_default"],
             img_back: data["sprites"]["back_default"],
             hp: data["stats"].find { |obj| obj["stat"]["name"] == "hp"}["base_stat"],
-            evolves_from: !evo_from.nil? ? evo_from["name"] : nil,
+            # to get evolves to use a .find to match evolves from and self.name
+            evolves_from: !evo_from.nil? ? evo_from["name"] : nil, 
         }
         objects << pokemon
     }
