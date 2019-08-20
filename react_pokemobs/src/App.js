@@ -11,47 +11,35 @@ import PokeCentre from "./components/PokeCentre";
 import PokemonContainer from "./containers/PokemonContainer";
 
 class App extends Component {
+  state = {
+    user: null
+  };
 
-  // buildIndex = () => {
-  // this.fetchData().then(console.log)
-  // pokemon =>
-  //   pokemon.forEach(p => {
-  //     this.setState({
-  //       pokemon: p
-  //     });
-  //   })
-  // );
-  // };
+  componentDidMount() {
+    API.validateUser().then(user => {
+      if (user.user) {
+        this.setState({
+          user: {
+            username: user.user.data.attributes.username,
+            user_id: user.user.data.attributes.id
+          }
+        });
+      }
+    });
+  }
 
-  // state = {
-  //   user: null,
-  //   pokemon: [],
-
-  // };
-
-  // componentDidMount() {
-  //   // API.validateUser().then(data => {
-  //   //   if (data.user) {
-  //   //     this.setState({
-  //   //       user: data.user.data
-  //   //     });
-  //   //   }
-  //   // });
-
-  //   // API.fetchPokemon().then(pokemon =>
-  //   //   this.setState({
-  //   //     pokemon: pokemon.data
-  //   //   })
-  //   // )
-
-  // }
-
-  submitSignUp = user => API.signUpUser(user);
+  submitSignUp = user => {
+    API.signUpUser(user).then(user =>
+      this.setState({
+        user: user.data.attributes.username
+      })
+    );
+  };
 
   submitSignIn = user => {
     API.signInUser(user).then(user =>
       this.setState({
-        user: user.data
+        user: user.data.attributes.username
       })
     );
   };
@@ -59,15 +47,17 @@ class App extends Component {
   logOut = () => API.clearToken();
 
   render() {
-    // const { user } = this.state;
     return (
       <React.Fragment>
-        {/* <PokeDex addPokemon={this.fetchPokemon} logOut={this.logOut} /> */}
-        {/* <FormsContainer
-          submitSignUp={this.submitSignUp}
-          submitSignIn={this.submitSignIn}
-        /> */}
-  <PokeDex />
+        {this.state.user !== null ? (
+          <PokeDex addPokemon={this.fetchPokemon} logOut={this.logOut} user={this.state.user} />
+        ) : (
+          <FormsContainer
+            submitSignUp={this.submitSignUp}
+            submitSignIn={this.submitSignIn}
+          />
+        )}
+
         <Route exact path="/arena" component={Arena} />
         <Route exact path="/pokemon" component={Pokemon} />
         <Route exact path="/pokecentre" component={PokeCentre} />

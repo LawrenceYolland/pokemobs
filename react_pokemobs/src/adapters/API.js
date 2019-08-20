@@ -3,6 +3,7 @@ const signupURL = `${endpoint}/users`;
 const loginURL = `${endpoint}/login`;
 const validateURL = `${endpoint}/validate`;
 const pokemonURL = `${endpoint}/pokemons`;
+const userPokemonURL = `${endpoint}/user_pokemons`;
 
 const jsonify = resp => {
   if (resp.ok) return resp.json();
@@ -64,12 +65,38 @@ const validateUser = () => {
     .catch(handleServerError);
 };
 
-const fetchPokemon = () => fetch(pokemonURL).then(resp => resp.json())
+const fetchPokemon = () => fetch(pokemonURL).then(resp => resp.json());
+
+const addUserPokemon = (user_id, selectedPokemon) => {
+
+  const data = {
+    user_id,
+    pokemon_id: selectedPokemon.id,
+    xp: 0,
+    hp: selectedPokemon.hp
+  };
+  const configObj = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  };
+  return fetch(userPokemonURL, configObj).catch(handleServerError);
+};
+
+const fetchUserPokemon = () => {
+  return fetch(userPokemonURL)
+    .then(jsonify)
+    .catch(handleServerError);
+};
 
 export default {
   signUpUser,
   signInUser,
   validateUser,
   clearToken,
-  fetchPokemon
+  fetchPokemon,
+  addUserPokemon,
+  fetchUserPokemon
 };

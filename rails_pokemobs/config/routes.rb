@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get '/profile', to: 'users#profile'
       resources :pokemons, only: [ :index, :show ]
       resources :users, only: [ :show, :create, :index ]
+      resources :user_pokemons, only: [ :create, :index ]
     end
   end
 end
