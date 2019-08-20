@@ -6,32 +6,45 @@ import FormsContainer from "./containers/FormsContainer";
 import PokeDex from "./containers/PokeDex";
 import API from "./adapters/API";
 import Arena from "./components/Arena";
-import Pokemon from "./components/Pokemon";
+import Pokemon from "./containers/PokemonContainer";
 import PokeCentre from "./components/PokeCentre";
+import PokemonContainer from "./containers/PokemonContainer";
 
 class App extends Component {
-  state = {
-    user: null,
-    pokemon: []
-  };
 
-  componentDidMount() {
-    API.validateUser().then(data => {
-      if (data.user) {
-        this.setState({
-          user: data.user.data
-        });
-      }
-    });
+  // buildIndex = () => {
+  // this.fetchData().then(console.log)
+  // pokemon =>
+  //   pokemon.forEach(p => {
+  //     this.setState({
+  //       pokemon: p
+  //     });
+  //   })
+  // );
+  // };
 
-    API.fetchPokemon().then(pokemon =>
-      this.setState({
-        pokemon: pokemon.data
-      })
-    )
+  // state = {
+  //   user: null,
+  //   pokemon: [],
 
+  // };
 
-  }
+  // componentDidMount() {
+  //   // API.validateUser().then(data => {
+  //   //   if (data.user) {
+  //   //     this.setState({
+  //   //       user: data.user.data
+  //   //     });
+  //   //   }
+  //   // });
+
+  //   // API.fetchPokemon().then(pokemon =>
+  //   //   this.setState({
+  //   //     pokemon: pokemon.data
+  //   //   })
+  //   // )
+
+  // }
 
   submitSignUp = user => API.signUpUser(user);
 
@@ -46,15 +59,15 @@ class App extends Component {
   logOut = () => API.clearToken();
 
   render() {
-    const { user } = this.state;
+    // const { user } = this.state;
     return (
       <React.Fragment>
         {/* <PokeDex addPokemon={this.fetchPokemon} logOut={this.logOut} /> */}
-        <FormsContainer
+        {/* <FormsContainer
           submitSignUp={this.submitSignUp}
           submitSignIn={this.submitSignIn}
-        />
-        )}
+        /> */}
+  <PokeDex />
         <Route exact path="/arena" component={Arena} />
         <Route exact path="/pokemon" component={Pokemon} />
         <Route exact path="/pokecentre" component={PokeCentre} />

@@ -6,7 +6,7 @@ class PokeCentre extends Component {
     return (
       <div>
         PokeCentre
-        <button onClick={() => window.history.back()}>back</ button>
+        
       </div>
     );
   }

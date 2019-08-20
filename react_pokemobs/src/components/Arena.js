@@ -6,7 +6,9 @@ class Arena extends Component {
     return (
       <div>
         Arena
-        <button onClick={() => window.history.back()}>back</ button>
+        <div className="theGame">
+            This is where the game will be by the way
+        </div>
       </div>
     );
   }
