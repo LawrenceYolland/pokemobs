@@ -33,7 +33,14 @@ class App extends Component {
         user: user.data.attributes.username
       })
     );
+    assignRandomPokemon(user)
   };
+
+  // add random [pokemon to new user]
+  assignRandomPokemon = (user) => {
+    const randomPokemon = this.state.pokemon.find(p => p.id === )
+   API.addUserPokemon(user, randomPokemon)
+  }
 
   submitSignIn = user => {
     API.signInUser(user).then(user =>
