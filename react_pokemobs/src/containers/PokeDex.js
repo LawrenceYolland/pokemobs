@@ -4,63 +4,40 @@ import PokemonContainer from "./PokemonContainer";
 import Arena from "../components/Arena";
 import PokeCentre from "../components/PokeCentre";
 import API from "../adapters/API";
+import PokemonSelector from "../components/PokemonSelector";
 
 class PokeDex extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    menuToggle: 0
+  };
 
-    this.state = {
-      query: "",
-      pokemon: [],
-      usersPokemon: [],
-      menuToggle: 0,
-      selectedPokemon: [],
-      user: props.user
-    };
-  }
-
-  componentDidMount() {
-    API.fetchPokemon().then(data =>
-      data.data.forEach(pokemon =>
-        this.setState({
-          pokemon: [...this.state.pokemon, pokemon.attributes]
-        })
-      )
+  filterUserPokemon = () => {
+    return this.props.allUsersPokemon.filter(
+      p => p.user_id === this.props.user.user_id
     );
-    API.fetchUserPokemon()
-      .then(data =>
-        data.data.filter(
-          pokemon => pokemon.attributes.user_id === this.state.user.user_id
-        )
-      )
-      .then(user_pokemon =>
-        user_pokemon.forEach(p =>
-          this.setState({
-            usersPokemon: [...this.state.usersPokemon, p.attributes.pokemon_id]
-          })
-        )
-      );
-  }
+  };
 
   menuToggle = () => {
     this.setState({ menuToggle: 0 });
   };
 
   selectPokemon = selectedPokemon => {
-    API.addUserPokemon(this.state.user.user_id, selectedPokemon);
+    API.addUserPokemon(this.props.user.user_id, selectedPokemon);
   };
 
   render() {
     let view;
+
     if (this.state.menuToggle === 1) {
-      view = <Arena />;
+      view = <Arena pokemon={this.props.pokemon}  />;
     } else if (this.state.menuToggle === 2) {
       view = (
-        <PokemonContainer
-          pokemon={this.state.pokemon}
-          user={this.state.user}
-          userPokemon={this.state.usersPokemon}
+        <PokemonContainer className="pokemon-container"
+          pokemon={this.props.pokemon}
+          user={this.props.user}
+          userPokemon={this.props.userPokemon}
           selectPokemon={this.selectPokemon}
+          filterUserPokemon={this.filterUserPokemon()}
         />
       );
     } else if (this.state.menuToggle === 3) {
@@ -85,7 +62,17 @@ class PokeDex extends Component {
     return (
       <div className="pokedex-menu">
         <button onClick={() => this.menuToggle()}>go back</button>
-        {view}
+        <button onClick={() => this.props.logOut()}>Log Out</button>
+        {this.filterUserPokemon().length !== 0 ||
+        this.props.userPokemon.length !== 0 ? (
+          view
+        ) : (
+          <PokemonSelector
+            pokemon={this.props.pokemon}
+            user={this.props.user}
+            setFirstPokemon={this.props.setFirstPokemon}
+          />
+        )}
       </div>
     );
   }

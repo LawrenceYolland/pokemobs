@@ -67,10 +67,10 @@ const validateUser = () => {
 
 const fetchPokemon = () => fetch(pokemonURL).then(resp => resp.json());
 
-const addUserPokemon = (user_id, selectedPokemon) => {
-
+const addUserPokemon = (id, selectedPokemon) => {
+  
   const data = {
-    user_id,
+    user_id: id,
     pokemon_id: selectedPokemon.id,
     xp: 0,
     hp: selectedPokemon.hp
@@ -82,7 +82,8 @@ const addUserPokemon = (user_id, selectedPokemon) => {
     },
     body: JSON.stringify(data)
   };
-  return fetch(userPokemonURL, configObj).catch(handleServerError);
+  return fetch(userPokemonURL, configObj)
+    .catch(handleServerError);
 };
 
 const fetchUserPokemon = () => {

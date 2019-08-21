@@ -11,7 +11,11 @@ import PokeCentre from "./components/PokeCentre";
 
 class App extends Component {
   state = {
-    user: null
+    user: { username: null, id: null },
+    pokemon: [],
+    selectedPokemon: [],
+    userPokemon: [],
+    allUsersPokemon: []
   };
 
   componentDidMount() {
@@ -25,38 +29,70 @@ class App extends Component {
         });
       }
     });
+
+    API.fetchPokemon().then(data =>
+      data.data.forEach(pokemon =>
+        this.setState({
+          pokemon: [...this.state.pokemon, pokemon.attributes]
+        })
+      )
+    );
+
+    API.fetchUserPokemon().then(users_pokemon =>
+      users_pokemon.data.forEach(p =>
+        this.setState({
+          allUsersPokemon: [...this.state.allUsersPokemon, p.attributes]
+        })
+      )
+    );
   }
 
   submitSignUp = user => {
-    API.signUpUser(user).then(user =>
+    API.signUpUser(user).then(user => {
       this.setState({
-        user: user.data.attributes.username
-      })
-    );
-    assignRandomPokemon(user)
+        user: {
+          username: user.data.attributes.username,
+          user_id: user.data.attributes.id
+        }
+      });
+    });
   };
-
-  // add random [pokemon to new user]
-  assignRandomPokemon = (user) => {
-    const randomPokemon = this.state.pokemon.find(p => p.id === )
-   API.addUserPokemon(user, randomPokemon)
-  }
 
   submitSignIn = user => {
     API.signInUser(user).then(user =>
       this.setState({
-        user: user.data.attributes.username
+        user: {
+          username: user.data.attributes.username,
+          user_id: user.data.attributes.id
+        }
       })
     );
   };
 
-  logOut = () => API.clearToken();
+  logOut = () => {
+    API.clearToken();
+    this.setState({ user: null, usersPokemon: [], selectedPokemon: [] });
+  };
+
+  setFirstPokemon = pokemon => {
+    this.setState({
+      userPokemon: [pokemon]
+    });
+  };
 
   render() {
     return (
       <React.Fragment>
         {this.state.user !== null ? (
-          <PokeDex addPokemon={this.fetchPokemon} logOut={this.logOut} user={this.state.user} />
+          <PokeDex
+            addPokemon={this.fetchPokemon}
+            logOut={this.logOut}
+            user={this.state.user}
+            pokemon={this.state.pokemon}
+            allUsersPokemon={this.state.allUsersPokemon}
+            userPokemon={this.state.userPokemon}
+            setFirstPokemon={this.setFirstPokemon}
+          />
         ) : (
           <FormsContainer
             submitSignUp={this.submitSignUp}
