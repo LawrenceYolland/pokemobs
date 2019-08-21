@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Form, Button } from "semantic-ui-react";
 
 class SignUpForm extends Component {
   state = {
@@ -21,25 +22,29 @@ class SignUpForm extends Component {
     return (
       <div>
         <h1>Sign Up</h1>
-        <form onSubmit={e => this.handleSubmit(e)}>
-          <label>Username:</label>
-          <input
-            type="text"
-            placeholder="username"
-            value={this.state.username}
-            onChange={this.handleChange}
-            name="username"
-          />
-          <label>Password:</label>
-          <input
-            type="password"
-            placeholder="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-            name="password"
-          />
-          <button type="submit">submit</button>
-        </form>
+        <Form onSubmit={e => this.handleSubmit(e)} v>
+          <Form.Field required>
+            <label>Username:</label>
+            <input
+              type="text"
+              placeholder="username"
+              value={this.state.username}
+              onChange={this.handleChange}
+              name="username"
+            />
+          </Form.Field>
+          <Form.Field required>
+            <label>Password:</label>
+            <input
+              type="password"
+              placeholder="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+              name="password"
+            />
+          </Form.Field>
+          <Button type="submit" fluid>sign up</Button>
+        </Form>
       </div>
     );
   }

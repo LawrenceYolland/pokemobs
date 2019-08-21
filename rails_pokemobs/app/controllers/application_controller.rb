@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
 
   def get_token
     request.headers["Authorization"] || request.headers["Authorisation"]
-    end
+  end
 
   def encode_token(payload)
     #   use => ENV['RAILS_SECRET'])

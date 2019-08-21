@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import { BrowserRouter as Router, Route, withRouter } from "react-router-dom";
+import { BrowserRouter as Route, withRouter } from "react-router-dom";
 import FormsContainer from "./containers/FormsContainer";
 import PokeDex from "./containers/PokeDex";
 import API from "./adapters/API";
 import Arena from "./components/Arena";
 import Pokemon from "./containers/PokemonContainer";
 import PokeCentre from "./components/PokeCentre";
-import PokemonContainer from "./containers/PokemonContainer";
 
 class App extends Component {
   state = {

@@ -52,36 +52,34 @@ class PokeDex extends Component {
 
   render() {
     let view;
-    {
-      if (this.state.menuToggle === 1) {
-        view = <Arena />;
-      } else if (this.state.menuToggle === 2) {
-        view = (
-          <PokemonContainer
-            pokemon={this.state.pokemon}
-            user={this.state.user}
-            userPokemon={this.state.usersPokemon}
-            selectPokemon={this.selectPokemon}
-          />
-        );
-      } else if (this.state.menuToggle === 3) {
-        view = <PokeCentre />;
-      } else {
-        view = (
-          <div>
-            <h1>Pokedex</h1>
-            <button onClick={() => this.setState({ menuToggle: 1 })}>
-              Arena
-            </button>
-            <button onClick={() => this.setState({ menuToggle: 2 })}>
-              Pokemon
-            </button>
-            <button onClick={() => this.setState({ menuToggle: 3 })}>
-              Pokecentre
-            </button>
-          </div>
-        );
-      }
+    if (this.state.menuToggle === 1) {
+      view = <Arena />;
+    } else if (this.state.menuToggle === 2) {
+      view = (
+        <PokemonContainer
+          pokemon={this.state.pokemon}
+          user={this.state.user}
+          userPokemon={this.state.usersPokemon}
+          selectPokemon={this.selectPokemon}
+        />
+      );
+    } else if (this.state.menuToggle === 3) {
+      view = <PokeCentre />;
+    } else {
+      view = (
+        <div>
+          <h1>Pokedex</h1>
+          <button onClick={() => this.setState({ menuToggle: 1 })}>
+            Arena
+          </button>
+          <button onClick={() => this.setState({ menuToggle: 2 })}>
+            Pokemon
+          </button>
+          <button onClick={() => this.setState({ menuToggle: 3 })}>
+            Pokecentre
+          </button>
+        </div>
+      );
     }
 
     return (
