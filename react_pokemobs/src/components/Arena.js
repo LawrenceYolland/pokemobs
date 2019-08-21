@@ -34,14 +34,14 @@ class Arena extends Component {
   };
 
   runAway = () => {
-    alert("You're a little bitch");
+    console.log("regular attack");
+    // alert("run away");
   };
 
   updateTurn = () => {
     this.setState({
       turn: !this.state.turn
     });
-    alert("killed you with vines or somethinf")
   };
 
   render() {
@@ -53,8 +53,8 @@ class Arena extends Component {
     };
 
     return (
-      <div>
-        Arena
+      // <div>
+        // Arena
         <div className="game-body" style={style}>
           <div className="pokemon-game-containers">
             <EnemyPokemon
@@ -72,10 +72,8 @@ class Arena extends Component {
             />
           </div>
         </div>
-      </div>
     );
   }
 }
 
-// style={background-image: url("https://www.tynker.com/projects/images/08c85034c83474358721707acbed426823f1c4ef/background-scene---grass-battle-arena.png")
 export default Arena;

@@ -22,9 +22,7 @@ class HealthBar extends Component {
     this.setState(prevState => ({
       health: prevState > 0 ? 0 : prevState.health + 10
     }));
-
     console.log("heal");
-
     this.props.updateTurn();
   };
 
@@ -37,7 +35,6 @@ class HealthBar extends Component {
           indicating
           label="HP"
         />
-
         {this.props.player ? (
           <GameMenu
             pokemon={this.props.pokemon}
@@ -46,9 +43,10 @@ class HealthBar extends Component {
             heal={this.heal}
             runAway={this.props.runAway}
             turn={this.props.turn}
+            updateTurn={this.props.updateTurn}
           />
         ) : null}
-        <Button onClick={this.decrement} />
+        <Button onClick={this.decrement}>decrement health (testing)</Button>
       </div>
     );
   }

@@ -7,16 +7,6 @@
   transform: translate(-50%, -50%);
 }
 
-/* .sign-in {
-  float: right;
-  width: 50%;
-}
-
-.sign-up {
-  float: left;
-  width: 50%;
-} */
-
 .sign-in,
 .sign-up {
   margin: 5vh;
@@ -47,43 +37,39 @@
   width: 150px;
 }
 
-/* container div within game body */
+
 
 .pokemon-game-containers {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  width: 100%;
   padding: 3em 0;
   flex-direction: column;
 }
 
 .player-pokemon {
-  /* position: absolute;
   display: flex;
-  left: 250px;
-  bottom: 50px;
 
-  width: 50vh; */
-
-  /* position: absolute; */
-  display: flex;
-  /* flex-direction: row-reverse; */
-  /* left: 250px; */
-  /* bottom: 50px; */
   width: calc(50% + 150px);
   align-items: center;
   align-self: flex-start;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .enemy-pokemon {
-
-  align-self: flex-end;
-
   display: flex;
   flex-direction: row-reverse;
+
+  width: calc(50% + 100px);
   align-items: center;
+  align-self: flex-end;
+  /* justify-content: space-between; */
+}
+
+.ui.progress {
+  min-width: 300px;
 }
 
 .player-pokemon-sprite {
@@ -94,17 +80,7 @@
   height: 400px;
 }
 
-
 .game-menu {
-  /* right: 0px;
-  bottom: 0px; */
   background-color: blanchedalmond;
   border-radius: 2px;
 }
-
-/* .game-body {
-  background-image: url("https://www.tynker.com/projects/images/08c85034c83474358721707acbed426823f1c4ef/background-scene---grass-battle-arena.png");
-
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
