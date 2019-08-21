@@ -1,0 +1,14 @@
+#card_back{
+    height: 200px;
+}
+
+.image{
+    background-color: white;
+    margin: 3px;
+}
+
+#pokecard{
+    background-color: yellow;
+    text-align: center;
+    /* padding: 1%; */
+}
