@@ -37,6 +37,7 @@ class App extends Component {
     assignRandomPokemon(user)
   };
 
+  // add random [pokemon to new user]
   assignRandomPokemon = (user) => {
     const randomPokemon = this.state.pokemon.find(p => p.id === )
    API.addUserPokemon(user, randomPokemon)
