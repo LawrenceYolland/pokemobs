@@ -4,7 +4,7 @@ import { Card } from "semantic-ui-react";
 class PokemonCard extends React.Component {
   render() {
     const pokeCard = (
-      <div>
+      <div className={this.props.pokemon.pokemon_type}>
         <div className="image">
           <img
             src={this.props.pokemon.img_front}
@@ -22,7 +22,7 @@ class PokemonCard extends React.Component {
           <br />
           <span>{this.props.pokemon.pokemon_type}</span>
         </div>
-        <button onClick={() => this.props.selectPokemon(this.props.pokemon)}>
+        <button className="poke-selector" onClick={() => this.props.selectPokemon(this.props.pokemon)}>
           select this pokemon
         </button>
       </div>
@@ -41,7 +41,8 @@ class PokemonCard extends React.Component {
           p => p.pokemon_id === this.props.pokemon.id
         )
           ? pokeCard
-          : cardBack}
+          // switch second argument to "cardBack" for only user's pokemon shown
+          : pokeCard}
       </Card>
     );
   }

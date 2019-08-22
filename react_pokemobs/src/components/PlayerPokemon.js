@@ -5,7 +5,6 @@ import GameMenu from "./GameMenu";
 class PlayerPokemon extends Component {
   state = {
     pokemon: this.props.pokemon,
-    health: this.props.pokemon.hp,
     player: true
   };
 
@@ -18,10 +17,9 @@ class PlayerPokemon extends Component {
             src={this.props.pokemon.img_back}
             alt="a pokemon"
           />
-          {/* <div className="enemy-health-bar">
-            <div>name: {this.state.pokemon.name}</div> */}
+
           <HealthBar
-            pokemon={this.state.pokemon}
+            pokemon={this.props.pokemon}
             startingHP={this.props.pokemon.hp}
             health={this.props.health}
             updateTurn={this.props.updateTurn}
@@ -30,17 +28,11 @@ class PlayerPokemon extends Component {
             regularAttack={this.props.regularAttack}
             runAway={this.props.runAway}
             turn={this.props.turn}
+            enemyTurn={this.props.enemyTurn}
+            heal={this.props.heal}
           />
-          {/* </div>*/}
         </div>
-        {/* <GameMenu
-          pokemon={this.state.pokemon}
-          elementalAttack={this.props.elementalAttack}
-          regularAttack={this.props.regularAttack}
-          heal={this.heal}
-          runAway={this.props.runAway}
-          turn={this.props.turn}
-        /> */}
+
       </div>
     );
   }

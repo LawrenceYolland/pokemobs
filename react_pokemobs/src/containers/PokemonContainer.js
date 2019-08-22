@@ -15,8 +15,9 @@ class PokemonContainer extends React.Component {
       />
     ));
     return (
-      <div>
+      <div className="pokemon-container">
         <h1>Pokemon Collection</h1>
+        <p>choose a pokemon and then click go back..</p>
         <Card.Group itemsPerRow={6}>
           <br />
           <br />

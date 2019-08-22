@@ -5,8 +5,11 @@ import { Divider } from "semantic-ui-react";
 
 const FormsContainer = ({ submitSignUp, submitSignIn }) => {
   return (
+    <div>
+    <h1>i recommend you sign in ...</h1>
 
       <div className="forms-container">
+
         <div className="sign-up">
           <SignInForm submitSignIn={submitSignIn} />
         </div>
@@ -16,7 +19,7 @@ const FormsContainer = ({ submitSignUp, submitSignIn }) => {
         <Divider vertical>or</Divider>
 
       </div>
-
+      </div>
   );
 };
 

@@ -1,15 +1,19 @@
 import React, { Component } from "react";
-import { Progress, Button } from "semantic-ui-react";
+import { Progress } from "semantic-ui-react";
 import GameMenu from "./GameMenu";
+
 class HealthBar extends Component {
   state = {
-    health: ""
+    health: this.props.health
   };
 
-  componentDidMount() {
-    this.setState({
-      health: this.props.health
-    });
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.health !== this.props.health) {
+      this.setState({
+        health: this.props.health
+      });
+      
+    }
   }
 
   decrement = () => {
@@ -18,35 +22,26 @@ class HealthBar extends Component {
     }));
   };
 
-  heal = () => {
-    this.setState(prevState => ({
-      health: prevState > 0 ? 0 : prevState.health + 10
-    }));
-    console.log("heal");
-    this.props.updateTurn();
-  };
-
   render() {
     return (
       <div>
         <Progress
-          value={this.state.health}
+          value={this.props.health}
           total={this.props.startingHP}
           indicating
-          label="HP"
+          label={this.props.pokemon.name}
         />
         {this.props.player ? (
           <GameMenu
             pokemon={this.props.pokemon}
             elementalAttack={this.props.elementalAttack}
             regularAttack={this.props.regularAttack}
-            heal={this.heal}
+            heal={this.props.heal}
             runAway={this.props.runAway}
             turn={this.props.turn}
             updateTurn={this.props.updateTurn}
           />
         ) : null}
-        <Button onClick={this.decrement}>decrement health (testing)</Button>
       </div>
     );
   }
